@@ -9,11 +9,8 @@ import java.util.List;
  *        6
  *     3      8
  *   1    5  7   9
- *
- *
  * @Date: created in 2020/3/24 20:43
  */
-
 public class BinaryTree {
 
     public static void main(String[] args) {
