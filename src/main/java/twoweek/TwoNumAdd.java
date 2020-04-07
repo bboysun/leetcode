@@ -22,67 +22,72 @@ package twoweek;
 public class TwoNumAdd {
 
     public static void main(String[] args) {
-        ListNode node1 = new ListNode(2);
-        ListNode node11 = new ListNode(4);
-        ListNode node12 = new ListNode(3);
-        node1.next = node11;
-        node11.next = node12;
 
-        ListNode node2 = new ListNode(5);
-        ListNode node21 = new ListNode(6);
-        ListNode node22 = new ListNode(4);
-        node2.next = node21;
-        node21.next = node22;
+        // 构建列表方法1
+        ListNode node1 = buildList1(new int[]{2,4,3});
+
+        // 构建列表方法2
+        ListNode node2 = new ListNode(1);
+        buildList2(node2, new int[]{6,4});
 
         ListNode resNode = solution(node1, node2);
-        System.out.println("over");
-        //while ()
+        while (resNode != null) {
+            System.out.print(resNode.val + " ");
+            resNode = resNode.next;
+        }
     }
 
     private static ListNode solution(ListNode node1, ListNode node2) {
-        int tempVal = 0;
-        int more = 0;
-        ListNode root = new ListNode(0);
+        ListNode header = new ListNode(0);
+        ListNode temp = header;
+        // 记录进位数
+        int up = 0;
+        while (node1 != null || node2 != null) {
+            int a = node1 != null ? node1.val : 0;
+            int b = node2 != null ? node2.val : 0;
 
-        if (node1.val + node2.val + more >= 10) {
-            tempVal = node1.val + node2.val - 10;
-            more = 1;
-            root.val = tempVal;
-        } else {
-            tempVal = node1.val + node2.val;
-            root.val = tempVal;
-        }
-
-        ListNode tempNode = root;
-        ListNode tempNode1 = node1.next;
-        ListNode tempNode2 = node2.next;
-
-        while (tempNode1 != null && tempNode2 != null) {
-            ListNode node = new ListNode(0);
-            if (tempNode1.val + tempNode2.val + more >= 10) {
-                tempVal = tempNode1.val + tempNode2.val + more - 10;
-                more = 1;
-                node.val = tempVal;
-                tempNode.next = node;
-                tempNode = node;
-                tempNode1 = tempNode1.next;
-                tempNode2 = tempNode2.next;
+            int res;
+            if (a + b + up >= 10) {
+                res = (a + b + up) % 10;
+                up = 1;
             } else {
-                tempVal = tempNode1.val + tempNode2.val + more;
-                more = 0;
-                node.val = tempVal;
-                tempNode.next = node;
-                tempNode = node;
-                tempNode1 = tempNode1.next;
-                tempNode2 = tempNode2.next;
+                res = a + b + up;
+                up = 0;
             }
+
+            // 要将最终的结果通过next连接起来
+            temp.next = new ListNode(res);
+            temp = temp.next;
+
+            // 最终遍历到最后
+            if (node1 != null)
+                node1 = node1.next;
+            if (node2 != null)
+                node2 = node2.next;
         }
 
-        /*if (more == 1) {
+        if (up > 0)
+            temp.next = new ListNode(up);
 
-        }*/
+        return header.next;
+    }
 
-        return root;
+    static ListNode buildList1(int[] vals) {
+        ListNode header = new ListNode(vals[0]);
+        ListNode temp = header;
+        for (int i=1; i<vals.length; i++) {
+            temp.next = new ListNode(vals[i]);
+            temp = temp.next;
+        }
+        return header;
+    }
+
+    static void buildList2(ListNode header, int[] vals) {
+        ListNode temp = header;
+        for (int i=0; i<vals.length; i++) {
+            temp.next = new ListNode(vals[i]);
+            temp = temp.next;
+        }
     }
 
     static class ListNode {
