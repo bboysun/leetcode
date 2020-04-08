@@ -3,7 +3,9 @@ package twoweek;
 import com.sun.deploy.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Auther: Darryl
@@ -28,11 +30,13 @@ import java.util.List;
 public class LengthOfLongestSubstring {
 
     public static void main(String[] args) {
-        String strs = "abcabcbb";
-        System.out.println(solution(strs));
+        String strs = "pwwkew";
+        //System.out.println(solution(strs));
+        System.out.println(solution2(strs));
     }
 
     /**
+     * 暴力枚举
      * 有待优化
      * 执行用时 :1575 ms, 在所有 Java 提交中击败了5.01%的用户
      * 内存消耗 :40.2 MB, 在所有 Java 提交中击败了5.04%的用户
@@ -55,5 +59,32 @@ public class LengthOfLongestSubstring {
                 size = temp.size();
         }
         return size;
+    }
+
+
+    /**
+     * 滑动窗口：
+     * 我们通过set集合作为一个滑动窗口[i,j)，
+     * 起初i=j，我们向右滑动j索引，
+     * 当j索引数据不存在set集合中就会继续向右滑动，
+     * 直到j索引数据存在set集合中，此时我们就找到了从索引i开头的子集。
+     * 那么，如果我们依次对i索引数据都这样做，最终就会找到我们想要的结果。
+     * @param strs
+     * @return
+     */
+    public static int solution2(String strs) {
+        int length = strs.length();
+        int res = 0;
+        int i = 0, j = 0;
+        Set<Character> set = new HashSet<Character>();
+        while (i < length && j < length) {
+            if (!set.contains(strs.charAt(j))) {
+                set.add(strs.charAt(j++));
+                res = Math.max(res, j - i);
+            } else {
+                set.remove(strs.charAt(i++));
+            }
+        }
+        return res;
     }
 }
