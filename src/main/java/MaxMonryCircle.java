@@ -35,8 +35,10 @@ public class MaxMonryCircle {
             return Math.max(moneyArr[0], moneyArr[1]);
         }
 
+        // 使用临时变量暂存每个动态规划迭代过程中的最优解
         int temp = moneyArr[start + 2];
 
+        // 用i-2，i-1避免数组越界
         for (int i=start+2; i<end; i++) {
             temp = Math.max(temp + moneyArr[i-2], moneyArr[i-1]);
         }
