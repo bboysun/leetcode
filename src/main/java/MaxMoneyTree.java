@@ -52,7 +52,6 @@ public class MaxMoneyTree {
     }
 
     public static int max(TreeNode root) {
-        // 数组中第一个元素表示，左边最优值，第二个元素表示，右边最优值。
         if (root == null) {
             return 0;
         }
