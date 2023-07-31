@@ -24,12 +24,16 @@ public class ListReversal {
         ListNode node2 = new ListNode(6, node3);
         ListNode node1 = new ListNode(3, node2);
 
-        ListNode reversal = reversal(node1);
-        ListNode current = reversal;
-        while (current != null) {
-            System.out.println(current.value);
-            current = current.next;
-        }
+        //ListNode reversal = reversal(node1);
+
+        ListNode recursion = recursion(node1);
+        System.out.println();
+
+//        ListNode current = reversal;
+//        while (current != null) {
+//            System.out.println(current.value);
+//            current = current.next;
+//        }
     }
 
     // 迭代
@@ -51,5 +55,22 @@ public class ListReversal {
             current = temp;
         }
         return reversalNext;
+    }
+
+
+    // 递归
+    public static ListNode recursion(ListNode head) {
+        // 递归推出条件
+        if (head == null || head.next == null) {
+            return head;
+        }
+        // 返回新的头节点
+        ListNode temp = recursion(head.next);
+        // 反向指向前一个节点
+        head.next.next = head;
+        // 断开原来的next指针
+        head.next = null;
+        // 返回新头节点
+        return temp;
     }
 }
