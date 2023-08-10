@@ -3,9 +3,9 @@ import java.util.Arrays;
 /**
  * @Author: darrylsun
  * @Description: 寻找一个数组的中间值元素，中间值的特征是，中间值的左右的所有数的和等于右边的所有数的和
- * 如果一个数组中存在多个这样的中间值，那么取左边第一个的中间值元素
- * 给一个数组如：[3,9,5,1,11,6]
- * 返回输出：5
+ *         如果一个数组中存在多个这样的中间值，那么取左边第一个的中间值元素
+ *         给一个数组如：[3,9,5,1,11,6]
+ *         返回输出：5
  * @Date: 2023/8/10
  */
 public class FindMiddleNum {
@@ -28,7 +28,7 @@ public class FindMiddleNum {
     }
 
     public static void main(String[] args) {
-        int[] intArr = {-1,3,9,-9,11};
+        int[] intArr = {-1, 3, 9, -9, 11};
         System.out.println(findMiddle(intArr));
     }
 }
