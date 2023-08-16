@@ -40,7 +40,7 @@ public class TwoNumSum {
 	/**
 	 * 假设数据是有序的，考虑用二分法
 	 * 如：[1,3,5,7,8,9] target: 10
-	 * 输出：1,3
+	 * 输出：0,5
 	 */
 	public static String solution3(int[] arrInt, int target) {
 		for (int i = 0; i < arrInt.length; i++) {
@@ -61,6 +61,27 @@ public class TwoNumSum {
 		return "-1,-1";
 	}
 
+	/**
+	 * 假设数据是有序的，还有一种思路是双指针
+	 * 如：[1,3,5,7,8,9] target: 13
+	 * 输出：2，4
+	 */
+	public static String twoPoint(int[] arrInt, int target) {
+		// 双指针，类似二分查找，一个是最左指针，一个是最有指针，如果两个指针和 > target，右指针左移
+		int left = 0;
+		int right = arrInt.length - 1;
+		while (left < right) {
+			if (arrInt[left] + arrInt[right] == target) {
+				return left + "," + right;
+			} else if (arrInt[left] + arrInt[right] > target) {
+				right--;
+			} else {
+				left++;
+			}
+		}
+		return "-1,-1";
+	}
+
 	public static void main(String[] args) {
 		int[] intArr = {1, 3, 5, 2, 9, 8};
 		int target = 8;
@@ -71,5 +92,7 @@ public class TwoNumSum {
 		int[] ints = {1,3,5,7,8,9};
 		int target1 = 10;
 		System.out.println(solution3(ints, target1));
+		int target2 = 13;
+		System.out.println(twoPoint(ints, target2));
 	}
 }
