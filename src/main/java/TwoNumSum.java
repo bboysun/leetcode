@@ -37,10 +37,39 @@ public class TwoNumSum {
 		return "-1,-1";
 	}
 
+	/**
+	 * 假设数据是有序的，考虑用二分法
+	 * 如：[1,3,5,7,8,9] target: 10
+	 * 输出：1,3
+	 */
+	public static String solution3(int[] arrInt, int target) {
+		for (int i = 0; i < arrInt.length; i++) {
+			int start = i;
+			int end = arrInt.length - 1;
+			// 二分法查找的条件是，当搜索范围的起始位和终止位不重合表示需要继续二分搜索
+			while (start <= end) {
+				int mid = (end - start) / 2 + start;
+				if (arrInt[i] + arrInt[mid] == target) {
+					return i + "," + mid;
+				} else if (arrInt[i] + arrInt[mid] > target) {
+					end = mid - 1;
+				} else {
+					start = mid + 1;
+				}
+			}
+		}
+		return "-1,-1";
+	}
+
 	public static void main(String[] args) {
 		int[] intArr = {1, 3, 5, 2, 9, 8};
 		int target = 8;
 		System.out.println(solution(intArr, target));
 		System.out.println(solution2(intArr, target));
+
+
+		int[] ints = {1,3,5,7,8,9};
+		int target1 = 10;
+		System.out.println(solution3(ints, target1));
 	}
 }
