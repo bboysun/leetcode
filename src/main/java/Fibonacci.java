@@ -8,6 +8,7 @@ public class Fibonacci {
 
 	public static void main(String[] args) {
 		System.out.println(cal(10));
+		System.out.println(cal2(9));
 	}
 
 
@@ -24,6 +25,32 @@ public class Fibonacci {
 			return 1;
 		}
 		return cal(index - 1) + cal(index - 2);
+	}
+
+	/**
+	 * 去重递归 思想，利用空间换时间
+	 * @param index
+	 * @return
+	 */
+	public static int cal2(int index) {
+		int[] intArr = new int[index + 1];
+		return remove(intArr, index);
+	}
+
+	private static int remove(int[] intArr, int index) {
+		if (index == 0) {
+			intArr[0] = 0;
+			return 0;
+		}
+		if (index == 1) {
+			intArr[1] = 1;
+			return 1;
+		}
+		if (intArr[index] != 0) {
+			return intArr[index];
+		}
+		intArr[index] = remove(intArr, index - 1) + remove(intArr, index - 2);
+		return intArr[index];
 	}
 
 }
