@@ -24,11 +24,33 @@ public class SnakeTree {
         // 构建一棵树
         for (int i=0; i<arr.length; i++)
             buildTree(root, arr[i]);
+
+        List<Integer> res1 = new ArrayList<>();
+        midPrint(res1, root);
+        // 期望结果：1356789
+        res1.forEach(v -> System.out.println(v));
+
+
+
         List<LinkedList<Integer>> res = snakePrint(root);
         for (LinkedList<Integer> sub : res) {
             for (Integer val : sub)
                 System.out.print(" " + val + " ");
         }
+    }
+
+    /**
+     * 中序遍历
+     * @param res
+     * @param root
+     */
+    private static void midPrint(List<Integer> res, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        midPrint(res, root.left);
+        res.add(root.value);
+        midPrint(res, root.right);
     }
 
     private static List<LinkedList<Integer>> snakePrint(TreeNode root) {
@@ -59,6 +81,8 @@ public class SnakeTree {
             } else {
                 isLeft = !isLeft;
                 if (levelNode.size() >0)
+                    // 此时 cacheNode add null 是为了分割每一层做标示，如果是树的叶子节点，相当于为叶子节点下多加一层null节点，然后根据null节点跳出循环
+                    // 这里很关键，也很难理解
                     cacheNode.addLast(null);
                 res.add(levelNode);
                 levelNode = new LinkedList<Integer>();
