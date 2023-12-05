@@ -1,5 +1,10 @@
 package heap;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+
 /**
  * @Author: darrylsun
  * @Description: 获取当前运行java进程的初始化对内存大小
@@ -16,5 +21,20 @@ public class Testheap {
         System.out.println("-Xms : "+initalMemory + "M");
         System.out.println("-Xmx : "+maxMemory + "M");
 
+        List<OOMObject> res = new ArrayList<>();
+        while (true) {
+            UUID uuid = UUID.randomUUID();
+            OOMObject oomObject = new OOMObject(uuid.toString());
+            res.add(oomObject);
+        }
+
+    }
+
+    static class OOMObject {
+        private String name;
+
+        public OOMObject(String name) {
+            this.name = name;
+        }
     }
 }
