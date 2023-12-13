@@ -70,6 +70,25 @@ public class MaxSubString {
 		return res;
 	}
 
+
+	public static int findMaxSubStr3(String str) {
+		if (str == null && str.length() == 0) {
+			return 0;
+		}
+		Set<Character> cache = new HashSet<>();
+		int length = str.length();
+		int res = 0;
+		for (int i=0; i<length; i++) {
+			if (!cache.contains(str.charAt(i))) {
+				cache.add(str.charAt(i));
+				res = cache.size() > res ? cache.size() : res;
+			} else {
+				cache.clear();
+			}
+		}
+		return res;
+	}
+
 	public static Integer lengthOfLongestSubstring2(List<String> s) {
 		int maxLength = 0;
 		// 左指针
