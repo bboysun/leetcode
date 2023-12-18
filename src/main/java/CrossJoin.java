@@ -47,20 +47,4 @@ public class CrossJoin {
         }
     }
 
-    static class Coin {
-        private List<String> list;
-
-        public Coin(List<String> list) {
-            this.list = list;
-        }
-
-        public List<String> getList() {
-            return list;
-        }
-
-        public void setList(List<String> list) {
-            this.list = list;
-        }
-    }
-
 }
